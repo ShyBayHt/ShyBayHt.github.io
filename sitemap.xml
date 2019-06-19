@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/06/19/first/</loc>
+    
+    <lastmod>2019-06-19T09:16:38.457Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/06/19/post-title-with-whitespace/</loc>
     
     <lastmod>2019-06-19T06:04:18.521Z</lastmod>
