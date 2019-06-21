@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://shybayht.github.io/categories/index.html</loc>
+    
+    <lastmod>2019-06-21T03:00:44.608Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://shybayht.github.io/2019/06/19/hello-world/</loc>
+    
+    <lastmod>2019-06-21T02:56:47.663Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://shybayht.github.io/tags/index.html</loc>
+    
+    <lastmod>2019-06-21T02:46:45.723Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://shybayht.github.io/2019/06/19/first/</loc>
     
     <lastmod>2019-06-19T09:16:38.457Z</lastmod>
@@ -12,13 +33,6 @@
     <loc>https://shybayht.github.io/2019/06/19/post-title-with-whitespace/</loc>
     
     <lastmod>2019-06-19T06:04:18.521Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://shybayht.github.io/2019/06/19/hello-world/</loc>
-    
-    <lastmod>2019-06-19T03:57:56.788Z</lastmod>
     
   </url>
   
