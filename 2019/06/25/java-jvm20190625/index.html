@@ -12,15 +12,13 @@
 <p><strong>堆区:</strong>  </p>
 <p>​    1.存储的全部是对象，每个对象都包含一个与之对应的class的信息(class的目的是得到操作指令) ；</p>
 <p>​    2.jvm只有一个堆区(heap)，且被所有线程共享，堆中不存放基本类型和对象引用，只存放对象本身和数组本身； </p>
-<a id="more"></a>
-
 <p><strong>栈区:</strong>  </p>
-<p>​    1.每个线程包含一个栈区，栈中只保存基础数据类型本身和自定义对象的引用；</p>
-<pre><code>2.每个栈中的数据(原始类型和对象引用)都是私有的，其他栈不能访问；
-
-3.栈分为3个部分：基本类型变量区、执行环境上下文、操作指令区(存放操作指令)； </code></pre><p><strong>方法区（静态区）:</strong>  </p>
-<p>​    1.被所有的线程共享，方法区包含所有的class（class是指类的原始代码，要创建一个类的对象，首先要把该类的代码加载到方法区中，并且初始化）和static变量。 </p>
-<p>​     2.方法区中包含的都是在整个程序中永远唯一的元素，如class，static变量。  </p>
+<p>1.每个线程包含一个栈区，栈中只保存基础数据类型本身和自定义对象的引用； </p>
+<p>2.每个栈中的数据(原始类型和对象引用)都是私有的，其他栈不能访问； </p>
+<p>3.栈分为3个部分：基本类型变量区、执行环境上下文、操作指令区(存放操作指令)； </p>
+<p><strong>方法区（静态区）:</strong>  </p>
+<p>1.被所有的线程共享，方法区包含所有的class（class是指类的原始代码，要创建一个类的对象，首先要把该类的代码加载到方法区中，并且初始化）和static变量。 </p>
+<p>2.方法区中包含的都是在整个程序中永远唯一的元素，如class，static变量。  </p>
 <h3 id="二、实例演示"><a href="#二、实例演示" class="headerlink" title="二、实例演示"></a><strong>二、实例演示</strong></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">AppMain.java </span><br><span class="line">　</span><br><span class="line">　　<span class="keyword">public</span>   <span class="class"><span class="keyword">class</span>  <span class="title">AppMain</span>                //运行时, <span class="title">jvm</span> 把<span class="title">appmain</span>的代码全部都放入方法区     </span></span><br><span class="line"><span class="class">　　</span>&#123;     </span><br><span class="line">　　<span class="function"><span class="keyword">public</span>   <span class="keyword">static</span>   <span class="keyword">void</span>  <span class="title">main</span><span class="params">(String[] args)</span>  <span class="comment">//main 方法本身放入方法区。     </span></span></span><br><span class="line"><span class="function">　　</span>&#123;     </span><br><span class="line">　　Sample test1 = <span class="keyword">new</span>  Sample( <span class="string">" 测试1 "</span> );   <span class="comment">//test1是引用，所以放到栈区里， Sample是自定义对象应该放到堆里面     </span></span><br><span class="line">　　Sample test2 = <span class="keyword">new</span>  Sample( <span class="string">" 测试2 "</span> );     </span><br><span class="line">　　   </span><br><span class="line">　　test1.printName();     </span><br><span class="line">　　test2.printName();     </span><br><span class="line">　　&#125;     </span><br><span class="line">　　&#125;     </span><br><span class="line">　　   </span><br><span class="line">　　<span class="keyword">public</span>   <span class="class"><span class="keyword">class</span>  <span class="title">Sample</span>        //运行时, <span class="title">jvm</span> 把<span class="title">appmain</span>的信息都放入方法区     </span></span><br><span class="line"><span class="class">　　</span>&#123;     </span><br><span class="line">　　<span class="comment">/** 范例名称 */</span>     </span><br><span class="line">　　<span class="keyword">private</span> String name;      <span class="comment">//new Sample实例后， name 引用放入栈区里, name 对应的 String 对象放入堆里     </span></span><br><span class="line">　　   </span><br><span class="line">　　<span class="comment">/** 构造方法 */</span>     </span><br><span class="line">　　<span class="function"><span class="keyword">public</span>  <span class="title">Sample</span><span class="params">(String name)</span>     </span></span><br><span class="line"><span class="function">　　</span>&#123;     </span><br><span class="line">　　<span class="keyword">this</span> .name = name;     </span><br><span class="line">　　&#125;     </span><br><span class="line">　　   </span><br><span class="line">　　<span class="comment">/** 输出 */</span>     </span><br><span class="line">　　<span class="function"><span class="keyword">public</span>   <span class="keyword">void</span>  <span class="title">printName</span><span class="params">()</span>   <span class="comment">//在没有对象的时候，print方法跟随sample类被放入方法区里。     </span></span></span><br><span class="line"><span class="function">　　</span>&#123;     </span><br><span class="line">　　System.out.println(name);     </span><br><span class="line">　　&#125;     </span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://i.loli.net/2019/06/25/5d118fac852af36965.jpg" alt="运行时数据区"></p>
@@ -30,15 +28,11 @@
 
 <p><strong>该语句的执行过程：</strong> </p>
 <p>​    1、 Java虚拟机到方法区找到Sample类的类型信息，没有找到，因为Sample类还没有加载到方法区（这里可以看出，java中的内部类是单独存在的，而且刚开始的时候不会跟随包含类一起被加载，等到要用的时候才被加载）。Java虚拟机立马加载Sample类，把Sample类的类型信息存放在方法区里。 </p>
-<pre><code>2、 Java虚拟机首先在堆区中为一个新的Sample实例分配内存, 并在Sample实例的内存中存放一个方法区中存放Sample类的类型信息的内存地址。
-
-3、 JVM的进程中，每个线程都会拥有一个方法调用栈，用来跟踪线程运行中一系列的方法调用过程，栈中的每一个元素就被称为栈帧，每当线程调用一个方法的时候就会向方法栈压入一个新帧。这里的帧用来存储方法的参数、局部变量和运算过程中的临时数据。
-
-4、位于“=”前的Test1是一个在main()方法中定义的一个变量（一个Sample对象的引用），因此，它被会添加到了执行main()方法的主线程的JAVA方法调用栈中。而“=”将把这个test1变量指向堆区中的Sample实例。
-
-5、JVM在堆区里继续创建另一个Sample实例，并在main方法的方法调用栈中添加一个Test2变量，该变量指向堆区中刚才创建的Sample新实例。
-
-6、JVM依次执行它们的printName()方法。当JAVA虚拟机执行test1.printName()方法时，JAVA虚拟机根据局部变量test1持有的引用，定位到堆区中的Sample实例，再根据Sample实例持有的引用，定位到方法去中Sample类的类型信息，从而获得printName()方法的字节码，接着执行printName()方法包含的指令，开始执行。 </code></pre><h3 id="三、辨析"><a href="#三、辨析" class="headerlink" title="三、辨析"></a><strong>三、辨析</strong></h3><p><strong>在Java语言里堆(heap)和栈(stack)里的区别 ：</strong></p>
+<p>​    2、 Java虚拟机首先在堆区中为一个新的Sample实例分配内存, 并在Sample实例的内存中存放一个方法区中存放Sample类的类型信息的内存地址。</p>
+<p>​    3、 JVM的进程中，每个线程都会拥有一个方法调用栈，用来跟踪线程运行中一系列的方法调用过程，栈中的每一个元素就被称为栈帧，每当线程调用一个方法的时候就会向方法栈压入一个新帧。这里的帧用来存储方法的参数、局部变量和运算过程中的临时数据。</p>
+<p>​    4、位于“=”前的Test1是一个在main()方法中定义的一个变量（一个Sample对象的引用），因此，它被会添加到了执行main()方法的主线程的JAVA方法调用栈中。而“=”将把这个test1变量指向堆区中的Sample实例。</p>
+<pre><code>5、JVM在堆区里继续创建另一个Sample实例，并在main方法的方法调用栈中添加一个Test2变量，该变量指向堆区中刚才创建的Sample新实例。</code></pre><p>​    6、JVM依次执行它们的printName()方法。当JAVA虚拟机执行test1.printName()方法时，JAVA虚拟机根据局部变量test1持有的引用，定位到堆区中的Sample实例，再根据Sample实例持有的引用，定位到方法去中Sample类的类型信息，从而获得printName()方法的字节码，接着执行printName()方法包含的指令，开始执行。 </p>
+<h3 id="三、辨析"><a href="#三、辨析" class="headerlink" title="三、辨析"></a><strong>三、辨析</strong></h3><p><strong>在Java语言里堆(heap)和栈(stack)里的区别 ：</strong></p>
 <ol>
 <li>栈(stack)与堆(heap)都是Java用来在Ram中存放数据的地方。与C++不同，Java自动管理栈和堆，程序员不能直接地设置栈或堆。  　　</li>
 <li>栈的优势是，存取速度比堆要快，仅次于直接位于CPU中的寄存器。但缺点是，存在栈中的数据大小与生存期必须是确定的，缺乏灵活性。另外，栈数据可以共享（详见下面的介绍）。堆的优势是可以动态地分配内存大小，生存期也不必事先告诉编译器，Java的垃圾收集器会自动收走这些不再使用的数据。但缺点是，由于要在运行时动态分配内存，存取速度较慢。 </li>
